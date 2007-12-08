@@ -1,0 +1,81 @@
+body {
+   font-family: Verdana, Geneva, Arial, helvetica, sans-serif;
+   color: #999999;
+   font-size:85%;
+	background-color:#111122;
+}
+a {
+   text-decoration:none;
+			color:#FF9900;
+}
+a:hover {
+   text-decoration:underline;
+}
+th {
+	font-family: Verdana, Geneva, Arial, helvetica, sans-serif;
+}
+td {
+	font-family: Verdana, Geneva, Arial, helvetica, sans-serif;
+	vertical-align:top;
+}
+h1,h2,h3,h4,h5,h6 {
+   margin:0px 0px 0px 0px;
+}
+select,input {
+	font-family: Verdana, Geneva, Arial, helvetica, sans-serif;
+   font-size:80%;
+}
+form {
+   margin:0px 0px 0px 0px;
+}
+.maintable {
+   background-color:#666666;
+   font-size:85%;
+   -moz-border-radius:2px;
+   color:#333333;
+   border: 1px solid #666666;
+}
+.tablehead {
+   font-size:110%;
+   font-weight:bold;
+}
+.row1 {
+   background-color:#dddddd;
+}
+.row2 {
+   background-color:#eeeeee;
+}
+.active {
+   color:#339933;
+}
+.inactive {
+   color:#333366;
+}
+.seed {
+   background-color:#33cc33;
+}
+.leech {
+   background-color:#333333;
+}
+.hilite {
+   font-weight: bold;
+}
+.torrenttitle {
+   font-weight: bold;
+}
+.viewseloff {
+   border-top: 1px solid #666666;
+   border-right:1px solid #666666;
+   border-left: 1px solid #666666;
+   background-color: #444444;
+}
+.viewselon {
+   border-top: 1px solid #666666;
+   border-right:1px solid #666666;
+   border-left: 1px solid #666666;
+   background-color: #666666;
+   font-weight: bold;
+}
+.smalltext {
+   font-size:70%;
+}
