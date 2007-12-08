@@ -1,5 +1,4 @@
 #summary Screenshots
-= Screenshots of rtGui =
 
 http://rtgui.googlecode.com/svn/trunk/wiki/screen1.jpg
 
