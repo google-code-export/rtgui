@@ -39,7 +39,7 @@ echo "<tr><td><a href='index.php'><h1>rtGooey</h1></a>";
 echo "<i>The rTorrent Graphical User Interface</i><br>";
 
 echo "</td>";
-echo "<td align=right>";
+echo "<td align=right class='mediumtext'>";
 echo "<form method='post' action='control.php'>";
 echo "Max Up: ";
 echo "<select name='setmaxup'>";
@@ -180,15 +180,15 @@ if (!$data) {
 
 // Totals row...
 echo "<tr class='tablehead'><td>&nbsp;</td>";
-echo "<td align=center>".format_bytes($totcompleted_bytes)."</td>";
-echo "<td align=center>".format_bytes($totsize)."</td>";
-echo "<td align=center>".@round(($totpercent_complete/$totcount),2)." %</td>";
-echo "<td align=center>".format_bytes($totdown_rate)."</td>";
-echo "<td align=center>".format_bytes($totdown_total)."</td>";
-echo "<td align=center>".format_bytes($totup_rate)."</td>";
-echo "<td align=center>".format_bytes($totup_total)."</td>";
+echo "<td align=center nowrap>".format_bytes($totcompleted_bytes)."</td>";
+echo "<td align=center nowrap>".format_bytes($totsize)."</td>";
+echo "<td align=center nowrap>".@round(($totpercent_complete/$totcount),2)." %</td>";
+echo "<td align=center nowrap>".format_bytes($totdown_rate)."</td>";
+echo "<td align=center nowrap>".format_bytes($totdown_total)."</td>";
+echo "<td align=center nowrap>".format_bytes($totup_rate)."</td>";
+echo "<td align=center nowrap>".format_bytes($totup_total)."</td>";
 echo "<td>&nbsp;</td>";
-echo "<td align=center>".@round((($totratio/$totcount)/1000),2)." %</td>";
+echo "<td align=center nowrap>".@round((($totratio/$totcount)/1000),2)." %</td>";
 echo "<td>&nbsp;</td>";
 echo "<td>&nbsp;</td>";
 echo "</td>";
