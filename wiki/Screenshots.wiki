@@ -1,13 +1,6 @@
-#summary One-sentence summary of this page.
-
+#summary Screenshots
 = Screenshots of rtGui =
 
-Add your content here.
+http://rtgui.googlecode.com/svn/trunk/wiki/screen1.jpg
 
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+http://rtgui.googlecode.com/svn/trunk/wiki/screen2.jpg
