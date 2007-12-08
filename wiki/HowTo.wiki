@@ -1,0 +1,14 @@
+#summary HowTo install and use rTorrent
+#labels Featured
+
+= Introduction =
+
+This is the results of my one and only test platform - OpenSuse 10.3.  If you have issues running on your system, please ask and I will try and help!
+
+
+= Details =
+
+This is what worked for me.
+  * Install OpenSuse 10.3 - http://www.opensuse.org/
+  * Make sure Apache, PHP5, XML-RPC
+  * etc
