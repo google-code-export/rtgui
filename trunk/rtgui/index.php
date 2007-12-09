@@ -34,7 +34,7 @@ if (isset($r_setview)) $_SESSION['view']=$r_setview;
 $globalstats=get_global_stats();
 
 // Title Block...
-echo "<table width=100% border=0 cellpadding=5 cellspacing=0>";
+echo "<table width=100% border=0 cellpadding=5 cellspacing=0>\n";
 echo "<tr><td><a href='index.php'><h1>rtGooey</h1></a>";
 echo "<i>The rTorrent Graphical User Interface</i><br>\n";
 
@@ -86,7 +86,7 @@ if (is_array($data)) {
 }
 
 // View selection...
-echo "<table cellspacing=0 cellpadding=3>";
+echo "<table cellspacing=0 cellpadding=3>\n";
 echo "<tr><td>&nbsp;</td>\n";
 echo "<td class='".($_SESSION['view']=="main" ? "viewselon" : "viewseloff")."'><a href='?setview=main'>All</a></td>\n";
 echo "<td>&nbsp</td>\n";
@@ -102,9 +102,10 @@ echo "<td class='".($_SESSION['view']=="seeding" ? "viewselon" : "viewseloff")."
 echo "</tr></table>\n";
 
 // Main table 
-echo "<table class='maintable' border=0 cellspacing=0 cellpadding=5 width='100%'>";
+echo "<form action='control.php' method='post'>";
+echo "<table class='maintable' border=0 cellspacing=0 cellpadding=5 width='100%'>\n";
 // The headings, with sort links...
-echo "<tr class='tablehead'>";
+echo "<tr class='tablehead'>\n";
 echo "<td nowrap width='20%'><a href='?setsortkey=name&setsortord=".($_SESSION['sortord']=="asc" ? "desc" : "asc")."'>Name</a> ".($_SESSION['sortkey']=="name" ? ($_SESSION['sortord']=="asc" ? "$downarr" : "$uparr") :"")."</td>\n";
 echo "<td nowrap width='7%' align=center><a href='?setsortkey=completed_bytes&setsortord=".($_SESSION['sortord']=="asc" ? "desc" : "asc")."'>Leeched</a> ".($_SESSION['sortkey']=="completed_bytes" ? ($_SESSION['sortord']=="asc" ? "$downarr" : "$uparr") :"")."</td>\n";
 echo "<td nowrap width='7%' align=center><a href='?setsortkey=size_bytes&setsortord=".($_SESSION['sortord']=="asc" ? "desc" : "asc")."'>Size</a> ".($_SESSION['sortkey']=="size_bytes" ? ($_SESSION['sortord']=="asc" ? "$downarr" : "$uparr") :"")."</td>\n";
@@ -150,7 +151,7 @@ foreach($data AS $item) {
    echo "<td nowrap align=center>".format_bytes($item['completed_bytes'])."</td>\n";
    echo "<td nowrap align=center>".format_bytes($item['size_bytes'])."</td>\n";
    echo "<td nowrap align=center>".$item['percent_complete']." %<br>\n";
-   echo "<table border=0 cellspacing=0 cellpadding=1 bgcolor=#666666 width=50px><tr><td align=left>";
+   echo "<table border=0 cellspacing=0 cellpadding=1 bgcolor=#666666 width=50px><tr><td align=left>\n";
    echo "<img src='percentbar.gif' height=4px width=".round(($item['percent_complete']/2))."px>";
    echo "</td>\n</tr></table>\n";
    echo "</td>\n";
@@ -161,8 +162,16 @@ foreach($data AS $item) {
    echo "<td nowrap align=center>".$item['peers_connected']."/".$item['peers_not_connected']." (".$item['peers_complete'].")</td>\n";
    echo "<td nowrap align=center>".round(($item['ratio']/1000),2)." %</td>\n";
    echo "<td nowrap align=center>".$item['status_string']."</td>  ";
-   echo "<td nowrap align=center>".$item['priority_str']."</td>\n";
-   echo "</tr>";
+   echo "<td nowrap align=center>";
+   echo "<input type='hidden' name='hash[$totcount]' value='".$item['hash']."'>";
+   echo "<select name='set_tpriority[$totcount]'>\n";
+   echo "<option value='0' ".($item['priority']==0 ? "selected" : "").">Off</option>\n";
+   echo "<option value='1' ".($item['priority']==1 ? "selected" : "").">Low</option>\n";
+   echo "<option value='2' ".($item['priority']==2 ? "selected" : "").">Normal</option>\n";
+   echo "<option value='3' ".($item['priority']==3 ? "selected" : "").">High</option>\n";
+   echo "</select>\n";
+   echo "</td>\n";
+   echo "</tr>\n";
    $totcompleted_bytes+=$item['completed_bytes'];
    $totsize+=$item['size_bytes'];
    $totpercent_complete+=$item['percent_complete'];
@@ -190,10 +199,11 @@ echo "<td align=center nowrap>".format_bytes($totup_total)."</td>\n";
 echo "<td>&nbsp;</td>\n";
 echo "<td align=center nowrap>".@round((($totratio/$totcount)/1000),2)." %</td>\n";
 echo "<td>&nbsp;</td>\n";
-echo "<td>&nbsp;</td>\n";
+echo "<td align=right><input type='submit' value='Set'></td>\n";
 echo "</td>\n";
 echo "</table>\n";
-echo "<br>\n<br>\n<center class='smalltext'>Page created in ".$restime=round(microtime(true)-$execstart,3)." secs.<br>\n<a href='http://rtgui.googlecode.com'>rtGui v.1</a> - &copy; Copyright Simon Hall 2007</center>";
+echo "</form>";
+echo "<br>\n<br>\n<center class='smalltext'>Page created in ".$restime=round(microtime(true)-$execstart,3)." secs.<br>\n<a href='http://rtgui.googlecode.com'>rtGui v0.2</a> - &copy; Copyright Simon Hall 2007</center>";
 
 ?>
 </body>
