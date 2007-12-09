@@ -6,7 +6,7 @@ body {
 }
 a {
    text-decoration:none;
-   color:#3759BC;
+   color:#17399C;
 }
 a:hover {
    text-decoration:underline;
@@ -22,18 +22,18 @@ h1,h2,h3,h4,h5,h6 {
    margin:0px 0px 0px 0px;
 }
 select,input {
-	font-family: Verdana, Geneva, Arial, helvetica, sans-serif;
+   font-family: Verdana, Geneva, Arial, helvetica, sans-serif;
    font-size:80%;
 }
 form {
    margin:0px 0px 0px 0px;
 }
 .maintable {
-   background-color:#aaaaaa;
+   background-color:#cccccc;
    font-size:85%;
    -moz-border-radius:2px;
    color:#333333;
-   border: 1px solid #aaaaaa;
+   border: 1px solid #cccccc;
 }
 .tablehead {
    font-size:110%;
@@ -64,16 +64,16 @@ form {
    font-weight: bold;
 }
 .viewseloff {
-   border-top: 1px solid #aaaaaa;
-   border-right:1px solid #aaaaaa;
-   border-left: 1px solid #aaaaaa;
-   background-color: #888888;
+   border-top: 1px solid #cccccc;
+   border-right:1px solid #cccccc;
+   border-left: 1px solid #cccccc;
+   background-color: #aaaaaa;
 }
 .viewselon {
-   border-top: 1px solid #aaaaaa;
-   border-right:1px solid #aaaaaa;
-   border-left: 1px solid #aaaaaa;
-   background-color: #aaaaaa;
+   border-top: 1px solid #cccccc;
+   border-right:1px solid #cccccc;
+   border-left: 1px solid #cccccc;
+   background-color: #cccccc;
    font-weight: bold;
 }
 .smalltext {
