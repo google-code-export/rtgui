@@ -82,7 +82,7 @@ function get_full_list($view) {
          $retarr[$index]['is_multi_file']=$item[55];
          $retarr[$index]['is_open']=$item[56];
          $retarr[$index]['is_private']=$item[57];
-			$retarr[$index]['percent_complete']=round(($item[6])/($item[38])*100);
+			$retarr[$index]['percent_complete']=@round(($item[6])/($item[38])*100);
 			if ($item[52]==0) $retarr[$index]['status_string']="Stopped";
       	if ($item[5]==1) $retarr[$index]['status_string']="Complete";
 			if ($item[52]==1 && $item[8]=="leech") $retarr[$index]['status_string']="Downloading";
@@ -102,7 +102,6 @@ function get_full_list($view) {
 function get_file_list($hash) {
    $request = xmlrpc_encode_request("f.multicall",
        array($hash,"","f.get_completed_chunks=","f.get_frozen_path=","f.get_is_created=","f.get_is_open=","f.get_last_touched=","f.get_match_depth_next=","f.get_match_depth_prev=","f.get_offset=","f.get_path=","f.get_path_components=","f.get_path_depth=","f.get_priority=","f.get_range_first=","f.get_range_second=","f.get_size_bytes=","f.get_size_chunks="));
-
    $response = do_xmlrpc($request);
    if (xmlrpc_is_fault($response)) {
        trigger_error("xmlrpc: $response[faultString] ($response[faultCode])");
