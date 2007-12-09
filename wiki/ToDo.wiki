@@ -1,0 +1,11 @@
+#summary What's "ToDo" in rtGui
+#labels Featured
+
+= Introduction =
+
+This is a list of what needs to be done to rtGui
+
+
+= ToDo =
+
+  * Ability to set priority for torrents/files
