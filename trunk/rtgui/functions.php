@@ -15,7 +15,7 @@ function do_xmlrpc($request) {
 // Get full list - retrieve full list of torrents 
 function get_full_list($view) {
    $request = xmlrpc_encode_request("d.multicall",
-       array($view,"d.get_base_filename=","d.get_base_path=","d.get_bytes_done=","d.get_chunk_size=","d.get_chunks_hashed=","d.get_complete=","d.get_completed_bytes=","d.get_completed_chunks=","d.get_connection_current=","d.get_connection_leech=","d.get_connection_seed=","d.get_creation_date=","d.get_directory=","d.get_down_rate=","d.get_down_total=","d.get_free_diskspace=","d.get_hash=","d.get_hashing=","d.get_ignore_commands=","d.get_left_bytes=","d.get_local_id=","d.get_local_id_html=","d.get_max_file_size=","d.get_max_peers=","d.get_max_uploads=","d.get_message=","d.get_min_peers=","d.get_name=","d.get_peer_exchange=","d.get_peers_accounted=","d.get_peers_complete=","d.get_peers_connected=","d.get_peers_max=","d.get_peers_min=","d.get_peers_not_connected=","d.get_priority=","d.get_priority_str=","d.get_ratio=","d.get_size_bytes=","d.get_size_chunks=","d.get_size_files=","d.get_skip_rate=","d.get_skip_total=","d.get_state=","d.get_state_changed=","d.get_tied_to_file=","d.get_tracker_focus=","d.get_tracker_numwant=","d.get_tracker_size=","d.get_up_rate=","d.get_up_total=","d.get_uploads_max=","d.is_active=","d.is_hash_checked=","d.is_hash_checking=","d.is_multi_file=","d.is_open=","d.is_private="));
+       array($view,"d.get_base_filename=","d.get_base_path=","d.get_bytes_done=","d.get_chunk_size=","d.get_chunks_hashed=","d.get_complete=","d.get_completed_bytes=","d.get_completed_chunks=","d.get_connection_current=","d.get_connection_leech=","d.get_connection_seed=","d.get_creation_date=","d.get_directory=","d.get_down_rate=","d.get_down_total=","d.get_free_diskspace=","d.get_hash=","d.get_hashing=","d.get_ignore_commands=","d.get_left_bytes=","d.get_local_id=","d.get_local_id_html=","d.get_max_file_size=","d.get_message=","d.get_peers_min=","d.get_name=","d.get_peer_exchange=","d.get_peers_accounted=","d.get_peers_complete=","d.get_peers_connected=","d.get_peers_max=","d.get_peers_not_connected=","d.get_priority=","d.get_priority_str=","d.get_ratio=","d.get_size_bytes=","d.get_size_chunks=","d.get_size_files=","d.get_skip_rate=","d.get_skip_total=","d.get_state=","d.get_state_changed=","d.get_tied_to_file=","d.get_tracker_focus=","d.get_tracker_numwant=","d.get_tracker_size=","d.get_up_rate=","d.get_up_total=","d.get_uploads_max=","d.is_active=","d.is_hash_checked=","d.is_hash_checking=","d.is_multi_file=","d.is_open=","d.is_private="));
 
    $response = do_xmlrpc($request);
 
@@ -47,46 +47,44 @@ function get_full_list($view) {
          $retarr[$index]['local_id']=$item[20];
          $retarr[$index]['local_id_html']=$item[21];
          $retarr[$index]['max_file_size']=$item[22];
-         $retarr[$index]['max_peers']=$item[23];
-         $retarr[$index]['max_uploads']=$item[24];
-         $retarr[$index]['message']=$item[25];
-         $retarr[$index]['min_peers']=$item[26];
-         $retarr[$index]['name']=$item[27];
-         $retarr[$index]['peer_exchange']=$item[28];
-         $retarr[$index]['peers_accounted']=$item[29];
-         $retarr[$index]['peers_complete']=$item[30];
-         $retarr[$index]['peers_connected']=$item[31];
-         $retarr[$index]['peers_max']=$item[32];
-         $retarr[$index]['peers_min']=$item[33];
-         $retarr[$index]['peers_not_connected']=$item[34];
-         $retarr[$index]['priority']=$item[35];
-         $retarr[$index]['priority_str']=$item[36];
-         $retarr[$index]['ratio']=$item[37];
-         $retarr[$index]['size_bytes']=$item[38];
-         $retarr[$index]['size_chunks']=$item[39];
-         $retarr[$index]['size_files']=$item[40];
-         $retarr[$index]['skip_rate']=$item[41];
-         $retarr[$index]['skip_total']=$item[42];
-         $retarr[$index]['state']=$item[43];
-         $retarr[$index]['state_changed']=$item[44];
-         $retarr[$index]['tied_to_file']=$item[45];
-         $retarr[$index]['tracker_focus']=$item[46];
-         $retarr[$index]['tracker_numwant']=$item[47];
-         $retarr[$index]['tracker_size']=$item[48];
-         $retarr[$index]['up_rate']=$item[49];
-         $retarr[$index]['up_total']=$item[50];
-         $retarr[$index]['uploads_max']=$item[51];
-         $retarr[$index]['is_active']=$item[52];
-         $retarr[$index]['is_hash_checked']=$item[53];
-         $retarr[$index]['is_hash_checking']=$item[54];
-         $retarr[$index]['is_multi_file']=$item[55];
-         $retarr[$index]['is_open']=$item[56];
-         $retarr[$index]['is_private']=$item[57];
-			$retarr[$index]['percent_complete']=@round(($item[6])/($item[38])*100);
-			if ($item[52]==0) $retarr[$index]['status_string']="Stopped";
-      	if ($item[5]==1) $retarr[$index]['status_string']="Complete";
-			if ($item[52]==1 && $item[8]=="leech") $retarr[$index]['status_string']="Downloading";
-			if ($item[52]==1 && $item[8]=="seed") $retarr[$index]['status_string']="Seeding";
+         $retarr[$index]['message']=$item[23];
+         $retarr[$index]['peers_min']=$item[24];
+         $retarr[$index]['name']=$item[25];
+         $retarr[$index]['peer_exchange']=$item[26];
+         $retarr[$index]['peers_accounted']=$item[27];
+         $retarr[$index]['peers_complete']=$item[28];
+         $retarr[$index]['peers_connected']=$item[29];
+         $retarr[$index]['peers_max']=$item[30];
+         $retarr[$index]['peers_not_connected']=$item[31];
+         $retarr[$index]['priority']=$item[32];
+         $retarr[$index]['priority_str']=$item[33];
+         $retarr[$index]['ratio']=$item[34];
+         $retarr[$index]['size_bytes']=$item[35];
+         $retarr[$index]['size_chunks']=$item[36];
+         $retarr[$index]['size_files']=$item[37];
+         $retarr[$index]['skip_rate']=$item[38];
+         $retarr[$index]['skip_total']=$item[39];
+         $retarr[$index]['state']=$item[40];
+         $retarr[$index]['state_changed']=$item[41];
+         $retarr[$index]['tied_to_file']=$item[42];
+         $retarr[$index]['tracker_focus']=$item[43];
+         $retarr[$index]['tracker_numwant']=$item[44];
+         $retarr[$index]['tracker_size']=$item[45];
+         $retarr[$index]['up_rate']=$item[46];
+         $retarr[$index]['up_total']=$item[47];
+         $retarr[$index]['uploads_max']=$item[48];
+         $retarr[$index]['is_active']=$item[49];
+         $retarr[$index]['is_hash_checked']=$item[50];
+         $retarr[$index]['is_hash_checking']=$item[51];
+         $retarr[$index]['is_multi_file']=$item[52];
+         $retarr[$index]['is_open']=$item[53];
+         $retarr[$index]['is_private']=$item[54];
+
+			$retarr[$index]['percent_complete']=@round(($retarr[$index]['completed_bytes'])/($retarr[$index]['size_bytes'])*100);
+			if ($retarr[$index]['is_active']==0) $retarr[$index]['status_string']="Stopped";
+      	if ($retarr[$index]['complete']==1) $retarr[$index]['status_string']="Complete";
+			if ($retarr[$index]['is_active']==1 && $retarr[$index]['connection_current']=="leech") $retarr[$index]['status_string']="Downloading";
+			if ($retarr[$index]['is_active']==1 && $retarr[$index]['connection_current']=="seed") $retarr[$index]['status_string']="Seeding";
          $index++;
       }
       if (isset($retarr)) {
@@ -161,6 +159,9 @@ function get_tracker_list($hash) {
 function get_global_stats() {
    $retarr['upload_cap'] = do_xmlrpc(xmlrpc_encode_request("get_upload_rate",array("")));
    $retarr['download_cap'] = do_xmlrpc(xmlrpc_encode_request("get_download_rate",array("")));
+   $retarr['diskspace'] = do_xmlrpc(xmlrpc_encode_request("get_directory",array("")));
+   $retarr['library_version'] = do_xmlrpc(xmlrpc_encode_request("system.library_version",array("")));
+   $retarr['client_version'] = do_xmlrpc(xmlrpc_encode_request("system.client_version",array("")));
    return $retarr;
 }
 

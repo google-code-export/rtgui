@@ -14,10 +14,10 @@ import_request_variables("gp","r_");
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>rtGooey</title>
+<link rel="shortcut icon" href="favicon.ico" />
+<title>rtGui</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
-
 <body>
 
 <?php
@@ -35,7 +35,7 @@ $globalstats=get_global_stats();
 
 // Title Block...
 echo "<table width=100% border=0 cellpadding=5 cellspacing=0>\n";
-echo "<tr><td><a href='index.php'><h1>rtGooey</h1></a>";
+echo "<tr><td><a href='index.php'><h1>rtGui</h1></a>";
 echo "<i>The rTorrent Graphical User Interface</i><br>\n";
 
 echo "</td>\n";
@@ -202,8 +202,13 @@ echo "<td>&nbsp;</td>\n";
 echo "<td align=right><input type='submit' value='Set'></td>\n";
 echo "</td>\n";
 echo "</table>\n";
-echo "</form>";
-echo "<br>\n<br>\n<center class='smalltext'>Page created in ".$restime=round(microtime(true)-$execstart,3)." secs.<br>\n<a href='http://rtgui.googlecode.com'>rtGui v0.2</a> - &copy; Copyright Simon Hall 2007</center>";
+echo "</form><br>\n<br>\n";
+echo "<center class='smalltext'>\n";
+echo "<a href='http://libtorrent.rakshasa.no/' target='_blank'>rTorrent ".$globalstats['client_version']."/".$globalstats['library_version']."</a> | ";
+echo "Disk Free: ".format_bytes(disk_free_space($globalstats['diskspace']))." | ";
+echo "Page created in ".$restime=round(microtime(true)-$execstart,3)." secs.<br>\n";
+echo "<a href='http://rtgui.googlecode.com' target='_blank'>rtGui v0.2.1</a> - &copy; Copyright Simon Hall 2007";
+echo "</center>\n";
 
 ?>
 </body>
