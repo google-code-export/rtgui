@@ -14,24 +14,20 @@ import_request_variables("gp","r_");
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>rtGooey</title>
+<link rel="shortcut icon" href="favicon.ico" />
+<title>rtGui</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
-
 <body>
 
 <?php
-if (!isset($r_setsortkey)) $r_setsortkey="name";
-if (!isset($r_setsortord)) $r_setsortord="asc";
-if (!isset($r_setview)) $r_setview="main";
 
-$globalstats=get_global_stats();
 
 echo "<table width=100% border=0 cellpadding=5 cellspacing=0>";
-echo "<tr><td><a href='index.php'><h1>rtGooey</h1></a>";
+echo "<tr><td><a href='index.php'><h1>rtGui</h1></a>";
 echo "<i>The rTorrent Graphical User Interface</i></td>";
 echo "<td>&nbsp;</td>";      
-echo "</td></table>\n<br>\n\n";
+echo "</td></table>\n<br>\n";
 
 // Torrent info...  (get all downloads, then filter out just this one by the hash)
 $alltorrents=get_full_list("main");
@@ -39,8 +35,10 @@ $thistorrent=array();
 foreach($alltorrents as $torrent) {
    if ($r_hash==$torrent['hash']) $thistorrent=$torrent;
 }
-echo "<br>\n\n&laquo; <a href='index.php'>Back</a> | ";
-echo "<a href='control.php?hash=".$thistorrent['hash']."&cmd=".($thistorrent['is_active']==1 ? "stop" : "start")."'>".($thistorrent['is_active']==1 ? "Stop" : "Start")."</a> | <a href='control.php?hash=".$thistorrent['hash']."&cmd=delete' onClick='return confirm(\"Are you sure?\");'>Delete</a> | <a href='control.php?hash=".$thistorrent['hash']."&cmd=hashcheck'>Check</a><br>\n\n<br>\n\n";
+echo "<br>&laquo; <a href='index.php'>Back</a> | ";
+echo "<a href='control.php?hash=".$thistorrent['hash']."&cmd=".($thistorrent['is_active']==1 ? "stop" : "start")."'>".($thistorrent['is_active']==1 ? "Stop" : "Start")."</a>";
+echo " | <a href='control.php?hash=".$thistorrent['hash']."&cmd=delete' onClick='return confirm(\"Delete torrent - are you sure? (This will not delete data from disk)\");'>Delete</a>";
+echo " | <a href='control.php?hash=".$thistorrent['hash']."&cmd=hashcheck'>Check</a><br><br>\n";
 
 if ($thistorrent['complete']) { $statusflags="Complete "; } else { $statusflags="Incomplete ";}
 if ($thistorrent['is_hash_checked']) $statusflags.="&middot; Hash Checked ";
@@ -56,9 +54,9 @@ echo "<tr class='row1'><td align=right><b>Message:</b></td><td>".$thistorrent['m
 echo "<tr class='row2'><td align=right><b>Completed Bytes:</td><td>".format_bytes($thistorrent['completed_bytes'])."</td></tr>\n";
 echo "<tr class='row1'><td align=right><b>Size:</b></td><td>".format_bytes($thistorrent['size_bytes'])."</td></tr>\n";
 echo "<tr class='row2'><td align=right><b>Complete:</b></td><td>".$thistorrent['percent_complete']." %&nbsp;&nbsp;";
-  echo "<table align=left border=0 cellspacing=0 cellpadding=1 bgcolor=#666666 width=50px><tr><td align=left>";
-  echo "<img src='percentbar.gif' height=4px width=".@round(($thistorrent['percent_complete']/2))."px>";
-  echo "</td></tr>\n</table>\n";
+echo "<table align=left border=0 cellspacing=0 cellpadding=1 bgcolor=#666666 width=50px><tr><td align=left>";
+echo "<img src='percentbar.gif' height=4px width=".@round(($thistorrent['percent_complete']/2))."px>";
+echo "</td></tr>\n</table>\n";
 echo "</td></tr>\n";
 echo "<tr class='row1'><td align=right><b>Down Rate:</b></td><td>".format_bytes($thistorrent['down_rate'])."</td></tr>\n";
 echo "<tr class='row2'><td align=right><b>Down Total:</b></td><td>".format_bytes($thistorrent['down_total'])."</td></tr>\n";
@@ -71,10 +69,10 @@ echo "<tr class='row2'><td align=right><b>Ratio:</b></td><td>".@round(($thistorr
 echo "<tr class='row1'><td align=right><b>Status:</b></td><td>".$thistorrent['status_string']."</td></tr>\n";
 echo "<tr class='row2'><td align=right><b>Priority:</b></td><td>".$thistorrent['priority_str']."</td></tr>\n";
 
-echo "</table>\n<br>\n\n";
+echo "</table>\n<br>\n";
 
 // tracker info...
-echo "<h2>Trackers:</h2>";
+echo "<h2>Trackers:</h2>\n";
 $data=get_tracker_list($r_hash);
 echo "<table border=0 cellspacing=0 cellpadding=5 class='maintable'>";
 echo "<tr class='tablehead'>";
@@ -94,10 +92,10 @@ foreach($data AS $item) {
    echo "<td align=center>".($item['is_enabled']==1 ? "Yes" : "No")."</td>";
    if ($thisrow=="row1") {$thisrow="row2";} else {$thisrow="row1";}
 }
-echo "</table>\n<br>\n\n";
+echo "</table>\n<br>\n";
 
 // file info...
-echo "<h2>File List:</h2>";
+echo "<h2>File List:</h2>\n";
 $data=get_file_list($r_hash);
 echo "<form action='control.php' action=post>";
 echo "<table border=0 cellspacing=0 cellpadding=5 class='maintable'>";
@@ -114,10 +112,10 @@ foreach($data AS $item) {
    echo "<tr class='$thisrow'>";
    echo "<td>".$item['get_path']."</td>";
    echo "<td align=center>".format_bytes($item['get_size_bytes'])."</td>";
-   echo "<td align=center>".@round(($item['get_completed_chunks']/$item['get_size_chunks'])*100)." %<br>\n\n";
-    echo "<table border=0 cellspacing=0 cellpadding=1 bgcolor=#666666 width=50px><tr><td align=left>\n";
-    echo "<img src='percentbar.gif' height=4px width=".@round((($item['get_completed_chunks']/$item['get_size_chunks'])*100)/2)."px>";
-    echo "</td></tr>\n</table>\n";
+   echo "<td align=center>".@round(($item['get_completed_chunks']/$item['get_size_chunks'])*100)." %<br>\n";
+   echo "<table border=0 cellspacing=0 cellpadding=1 bgcolor=#666666 width=50px><tr><td align=left>\n";
+   echo "<img src='percentbar.gif' height=4px width=".@round((($item['get_completed_chunks']/$item['get_size_chunks'])*100)/2)."px>";
+   echo "</td></tr>\n</table>\n";
    echo "</td>\n";
    echo "<td align=center>".$item['get_completed_chunks']." / ".$item['get_size_chunks']."</td>\n";
    echo "<td>\n";
