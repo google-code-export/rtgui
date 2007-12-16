@@ -189,4 +189,11 @@ function sort_matches_desc($left,$right) {
    if(strtolower($left["$sortkey"])==strtolower($right["$sortkey"])) return 0;
    return strtolower($left["$sortkey"]) > strtolower($right["$sortkey"]) ? -1 : 1 ;
 }
+
+function percentbar($percent) {
+   $retvar="<table border=0 cellspacing=0 cellpadding=1 bgcolor=#666666 width=50px><tr><td align=left>";
+   $retvar.="<img src='images/percentbar.gif' height=4px width=".$percent."px></td></tr>";   
+   $retvar.="</table>\n";
+   return $retvar;
+}
 ?>

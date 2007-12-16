@@ -53,5 +53,8 @@ switch($r_cmd) {
       $response = do_xmlrpc(xmlrpc_encode_request("load_start",array("$r_addurl")));    
       break;
 }
-header("Location: index.php");
+$referer=parse_url($_SERVER['HTTP_REFERER']);
+$script=basename($referer['path']);
+if (($script!='index.php' && $script!='view.php') || $r_cmd=="delete" ) $script='index.php';
+header("Location: $script?".$referer['query']);
 ?>
