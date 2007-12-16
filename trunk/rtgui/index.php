@@ -15,6 +15,9 @@ import_request_variables("gp","r_");
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <link rel="shortcut icon" href="favicon.ico" />
+<link rel="stylesheet" type="text/css" href="submodal/subModal.css" />
+<script type="text/javascript" src="submodal/common.js"></script>
+<script type="text/javascript" src="submodal/subModal.js"></script>
 <title>rtGui</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
@@ -36,7 +39,7 @@ $globalstats=get_global_stats();
 // Title Block...
 echo "<table width=100% border=0 cellpadding=5 cellspacing=0>\n";
 echo "<tr><td><a href='index.php'><h1>rtGui</h1></a>";
-echo "<i>The rTorrent Graphical User Interface</i><br>\n";
+echo "<i class='smalltext'>The rTorrent Graphical User Interface</i><br>\n";
 
 echo "</td>\n";
 echo "<td align=right class='mediumtext'>";
@@ -106,17 +109,19 @@ echo "<form action='control.php' method='post'>";
 echo "<table class='maintable' border=0 cellspacing=0 cellpadding=5 width='100%'>\n";
 // The headings, with sort links...
 echo "<tr class='tablehead'>\n";
+$uparr="<img src='images/uparrow.gif' height=8 width=5 alt='Descending'>";
+$downarr="<img src='images/downarrow.gif' height=8 width=5 alt='Ascending'>";
 echo "<td nowrap width='20%'><a href='?setsortkey=name&setsortord=".($_SESSION['sortord']=="asc" ? "desc" : "asc")."'>Name</a> ".($_SESSION['sortkey']=="name" ? ($_SESSION['sortord']=="asc" ? "$downarr" : "$uparr") :"")."</td>\n";
+echo "<td nowrap width='7%' align=center><a href='?setsortkey=status_string&setsortord=".($_SESSION['sortord']=="asc" ? "desc" : "asc")."'>Status</a> ".($_SESSION['sortkey']=="status_string" ? ($_SESSION['sortord']=="asc" ? "$downarr" : "$uparr") :"")."</td>\n";
+echo "<td nowrap width='7%' align=center><a href='?setsortkey=percent_complete&setsortord=".($_SESSION['sortord']=="asc" ? "desc" : "asc")."'>Done</a> ".($_SESSION['sortkey']=="percent_complete" ? ($_SESSION['sortord']=="asc" ? "$downarr" : "$uparr") :"")."</td>\n";
 echo "<td nowrap width='7%' align=center><a href='?setsortkey=completed_bytes&setsortord=".($_SESSION['sortord']=="asc" ? "desc" : "asc")."'>Leeched</a> ".($_SESSION['sortkey']=="completed_bytes" ? ($_SESSION['sortord']=="asc" ? "$downarr" : "$uparr") :"")."</td>\n";
 echo "<td nowrap width='7%' align=center><a href='?setsortkey=size_bytes&setsortord=".($_SESSION['sortord']=="asc" ? "desc" : "asc")."'>Size</a> ".($_SESSION['sortkey']=="size_bytes" ? ($_SESSION['sortord']=="asc" ? "$downarr" : "$uparr") :"")."</td>\n";
-echo "<td nowrap width='7%' align=center><a href='?setsortkey=percent_complete&setsortord=".($_SESSION['sortord']=="asc" ? "desc" : "asc")."'>Done</a> ".($_SESSION['sortkey']=="percent_complete" ? ($_SESSION['sortord']=="asc" ? "$downarr" : "$uparr") :"")."</td>\n";
 echo "<td nowrap width='7%' align=center><a href='?setsortkey=down_rate&setsortord=".($_SESSION['sortord']=="asc" ? "desc" : "asc")."'>Down Speed</a> ".($_SESSION['sortkey']=="down_rate" ? ($_SESSION['sortord']=="asc" ? "$downarr" : "$uparr") :"")."</td>\n";
 echo "<td nowrap width='7%' align=center><a href='?setsortkey=down_total&setsortord=".($_SESSION['sortord']=="asc" ? "desc" : "asc")."'>Down Size</a> ".($_SESSION['sortkey']=="down_total" ? ($_SESSION['sortord']=="asc" ? "$downarr" : "$uparr") :"")."</td>\n";
 echo "<td nowrap width='7%' align=center><a href='?setsortkey=up_rate&setsortord=".($_SESSION['sortord']=="asc" ? "desc" : "asc")."'>Up Speed</a> ".($_SESSION['sortkey']=="up_rate" ? ($_SESSION['sortord']=="asc" ? "$downarr" : "$uparr") :"")."</td>\n";
 echo "<td nowrap width='7%' align=center><a href='?setsortkey=up_total&setsortord=".($_SESSION['sortord']=="asc" ? "desc" : "asc")."'>Seeded</a> ".($_SESSION['sortkey']=="up_total" ? ($_SESSION['sortord']=="asc" ? "$downarr" : "$uparr") :"")."</td>\n";
 echo "<td nowrap width='7%' align=center><a href='?setsortkey=peers_connected&setsortord=".($_SESSION['sortord']=="asc" ? "desc" : "asc")."'>Peers</a> ".($_SESSION['sortkey']=="peers_connected" ? ($_SESSION['sortord']=="asc" ? "$downarr" : "$uparr") :"")."</td>\n";
 echo "<td nowrap width='7%' align=center><a href='?setsortkey=ratio&setsortord=".($_SESSION['sortord']=="asc" ? "desc" : "asc")."'>Ratio</a> ".($_SESSION['sortkey']=="ratio" ? ($_SESSION['sortord']=="asc" ? "$downarr" : "$uparr") :"")."</td>\n";
-echo "<td nowrap width='7%' align=center><a href='?setsortkey=status_string&setsortord=".($_SESSION['sortord']=="asc" ? "desc" : "asc")."'>Status</a> ".($_SESSION['sortkey']=="status_string" ? ($_SESSION['sortord']=="asc" ? "$downarr" : "$uparr") :"")."</td>\n";
 echo "<td nowrap width='7%' align=center><a href='?setsortkey=priority_str&setsortord=".($_SESSION['sortord']=="asc" ? "desc" : "asc")."'>Priority</a> ".($_SESSION['sortkey']=="priority_str" ? ($_SESSION['sortord']=="asc" ? "$downarr" : "$uparr") :"")."</td>\n";
 echo "</tr>";
 
@@ -132,36 +137,46 @@ $totup_total=0;
 $totratio=0;
 $totcount=0;
 foreach($data AS $item) {
-   if ($item['complete']) { $statusflags="Complete "; } else { $statusflags="Incomplete ";}
-   if ($item['is_hash_checked']) $statusflags.="&middot; Hash Checked ";
-   if ($item['is_hash_checking']) $statusflags.="&middot; Hash Checking ";
-   if ($item['is_multi_file']) $statusflags.="&middot; Multi-file ";
-   if ($item['is_open']) $statusflags.="&middot; Open ";
-   if ($item['is_private']) $statusflags.="&middot; Private ";
+   if ($item['complete']==1) {
+      $statusstyle="complete";
+   } else {
+      $statusstyle="incomplete";
+   }
+   if ($item['is_active']==1) {
+      $statusstyle.="active";
+   } else {
+      $statusstyle.="inactive";
+   }
 
    echo "<tr class='$thisrow'>";
    echo "<td colspan=12><span class='torrenttitle'>";
-   //echo ($item['connection_current']=="leech" ? "&darr;" : "&uarr");
-   echo "<a href='view.php?hash=".$item['hash']."' class='".($item['is_active']==1 ? "active" : "inactive")."'>".$item['name']."</a></span><br>\n";
-   echo "<i>".$statusflags."</i><br>\n";
-   echo $item['message']."</td>\n";
+
+   echo "<a class='submodal-600-500 $statusstyle' href='view.php?hash=".$item['hash']."'>".$item['name']."</a></span> ";
+
+   // message...
+   if ($item['message']!="") echo "<br>\n<span class='error'>".$item['message']."</span>\n";
    echo "</tr>";
+
    echo "<tr class='$thisrow'>";
-   echo "<td nowrap><a href='control.php?hash=".$item['hash']."&cmd=".($item['is_active']==1 ? "stop" : "start")."'>".($item['is_active']==1 ? "Stop" : "Start")."</a> | <a href='control.php?hash=".$item['hash']."&cmd=delete' onClick='return confirm(\"Delete torrent - are you sure? (This will not delete data from disk)\");'>Delete</a> | <a href='control.php?hash=".$item['hash']."&cmd=hashcheck'>Check</a></td>\n";
-   echo "<td nowrap align=center>".format_bytes($item['completed_bytes'])."</td>\n";
-   echo "<td nowrap align=center>".format_bytes($item['size_bytes'])."</td>\n";
-   echo "<td nowrap align=center>".$item['percent_complete']." %<br>\n";
-   echo "<table border=0 cellspacing=0 cellpadding=1 bgcolor=#666666 width=50px><tr><td align=left>\n";
-   echo "<img src='percentbar.gif' height=4px width=".round(($item['percent_complete']/2))."px>";
-   echo "</td>\n</tr></table>\n";
+   echo "<td nowrap class='datacol'>";
+   // Stop/start controls...
+   echo "<a href='control.php?hash=".$item['hash']."&cmd=".($item['is_active']==1 ? "stop" : "start")."'>".($item['is_active']==1 ? "<img alt='Stop torrent' border=0 src='images/stop.gif' width=16 height=16>" : "<img alt='Start torrent' border=0 src='images/start.gif' width=16 height=16>")."</a>&nbsp;";
+   echo "<a href='control.php?hash=".$item['hash']."&cmd=delete' onClick='return confirm(\"Delete torrent - are you sure? (This will not delete data from disk)\");'><img alt='Delete torrent' border=0 src='images/delete.gif' width=16 height=16></a>&nbsp;";
+   echo "<a class='submodal-600-500' href='view.php?hash=".$item['hash']."'><img alt='Torrent info' src='images/view.gif' width=16 height=16></a></span><br>\n";
+   // stats row...
+   echo "<td nowrap align=center class='datacol'><img src='images/".$statusstyle.".gif' width=10 height=9 alt='Status'>".$item['status_string']."</td>";
+   echo "<td nowrap align=center class='datacol'>".$item['percent_complete']." %<br>\n";
+   echo percentbar(@round(($item['percent_complete']/2)));
    echo "</td>\n";
-   echo "<td nowrap align=center>".format_bytes($item['down_rate'])."</td>\n";
-   echo "<td nowrap align=center>".format_bytes($item['down_total'])."</td>\n";
-   echo "<td nowrap align=center>".format_bytes($item['up_rate'])."</td>\n";
-   echo "<td nowrap align=center>".format_bytes($item['up_total'])."</td>\n";
-   echo "<td nowrap align=center>".$item['peers_connected']."/".$item['peers_not_connected']." (".$item['peers_complete'].")</td>\n";
-   echo "<td nowrap align=center>".round(($item['ratio']/1000),2)." %</td>\n";
-   echo "<td nowrap align=center>".$item['status_string']."</td>  ";
+   echo "<td nowrap align=center class='datacol'>".format_bytes($item['completed_bytes'])."</td>\n";
+   echo "<td nowrap align=center class='datacol'>".format_bytes($item['size_bytes'])."</td>\n";
+
+   echo "<td nowrap align=center class='datacol'>".format_bytes($item['down_rate'])."</td>\n";
+   echo "<td nowrap align=center class='datacol'>".format_bytes($item['down_total'])."</td>\n";
+   echo "<td nowrap align=center class='datacol'>".format_bytes($item['up_rate'])."</td>\n";
+   echo "<td nowrap align=center class='datacol'>".format_bytes($item['up_total'])."</td>\n";
+   echo "<td nowrap align=center class='datacol'>".$item['peers_connected']."/".$item['peers_not_connected']." (".$item['peers_complete'].")</td>\n";
+   echo "<td nowrap align=center class='datacol'>".round(($item['ratio']/1000),2)." %</td>\n";
    echo "<td nowrap align=center>";
    echo "<input type='hidden' name='hash[$totcount]' value='".$item['hash']."'>";
    echo "<select name='set_tpriority[$totcount]'>\n";
@@ -172,6 +187,8 @@ foreach($data AS $item) {
    echo "</select>\n";
    echo "</td>\n";
    echo "</tr>\n";
+
+   // Keep tally for totals
    $totcompleted_bytes+=$item['completed_bytes'];
    $totsize+=$item['size_bytes'];
    $totpercent_complete+=$item['percent_complete'];
@@ -183,31 +200,34 @@ foreach($data AS $item) {
    $totcount++;
    if ($thisrow=="row1") {$thisrow="row2";} else {$thisrow="row1";}
 }
+// Display message if no torrents to list...
 if (!$data) {
    echo "<tr class='row1'><td colspan=12 align=center>Empty</td>\n</tr>";
 }
 
 // Totals row...
 echo "<tr class='tablehead'><td>&nbsp;</td>\n";
-echo "<td align=center nowrap>".format_bytes($totcompleted_bytes)."</td>\n";
-echo "<td align=center nowrap>".format_bytes($totsize)."</td>\n";
-echo "<td align=center nowrap>".@round(($totpercent_complete/$totcount),2)." %</td>\n";
-echo "<td align=center nowrap>".format_bytes($totdown_rate)."</td>\n";
-echo "<td align=center nowrap>".format_bytes($totdown_total)."</td>\n";
-echo "<td align=center nowrap>".format_bytes($totup_rate)."</td>\n";
-echo "<td align=center nowrap>".format_bytes($totup_total)."</td>\n";
 echo "<td>&nbsp;</td>\n";
-echo "<td align=center nowrap>".@round((($totratio/$totcount)/1000),2)." %</td>\n";
-echo "<td>&nbsp;</td>\n";
-echo "<td align=right><input type='submit' value='Set'></td>\n";
+echo "<td align=center nowrap class='datacol'>".@round(($totpercent_complete/$totcount),2)." %</td>\n";
+echo "<td align=center nowrap class='datacol'>".format_bytes($totcompleted_bytes)."</td>\n";
+echo "<td align=center nowrap class='datacol'>".format_bytes($totsize)."</td>\n";
+echo "<td align=center nowrap class='datacol'>".format_bytes($totdown_rate)."</td>\n";
+echo "<td align=center nowrap class='datacol'>".format_bytes($totdown_total)."</td>\n";
+echo "<td align=center nowrap class='datacol'>".format_bytes($totup_rate)."</td>\n";
+echo "<td align=center nowrap class='datacol'>".format_bytes($totup_total)."</td>\n";
+echo "<td class='datacol'>&nbsp;</td>\n";
+echo "<td align=center nowrap class='datacol'>".@round((($totratio/$totcount)/1000),2)." %</td>\n";
+echo "<td align=center><input type='submit' value='Set'></td>\n";
 echo "</td>\n";
 echo "</table>\n";
 echo "</form><br>\n<br>\n";
+
+// Footer...
 echo "<center class='smalltext'>\n";
 echo "<a href='http://libtorrent.rakshasa.no/' target='_blank'>rTorrent ".$globalstats['client_version']."/".$globalstats['library_version']."</a> | ";
 echo "Disk Free: ".format_bytes(disk_free_space($globalstats['diskspace']))." | ";
 echo "Page created in ".$restime=round(microtime(true)-$execstart,3)." secs.<br>\n";
-echo "<a href='http://rtgui.googlecode.com' target='_blank'>rtGui v0.2.1</a> - &copy; Copyright Simon Hall 2007";
+echo "<a href='http://rtgui.googlecode.com' target='_blank'>rtGui v0.2.2</a> - by Simon Hall 2007";
 echo "</center>\n";
 
 ?>

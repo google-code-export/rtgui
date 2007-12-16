@@ -28,6 +28,9 @@ select,input {
 form {
    margin:0px 0px 0px 0px;
 }
+img {
+   border:0px solid #ffffff;
+}
 .maintable {
    background-color:#cccccc;
    font-size:85%;
@@ -44,18 +47,6 @@ form {
 }
 .row2 {
    background-color:#eeeeee;
-}
-.active {
-   color:#339933;
-}
-.inactive {
-   color:#333366;
-}
-.seed {
-   background-color:#33cc33;
-}
-.leech {
-   background-color:#333333;
 }
 .hilite {
    font-weight: bold;
@@ -81,4 +72,26 @@ form {
 }
 .mediumtext {
    font-size:85%;
+}
+.controls {
+   text-decoration:none;
+}
+.controls:hover {
+   text-decoration:none;
+   color:#339933;
+}
+.completeactive {
+   color: #339933;
+}
+.incompleteactive {
+   color: #333399;
+}
+.completeinactive {
+   color: #115511;
+}
+.incompleteinactive {
+   color: #111155;
+}
+.datacol {
+   border-right: 1px dotted #999999;
 }
