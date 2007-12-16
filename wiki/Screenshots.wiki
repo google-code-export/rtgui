@@ -1,6 +1,10 @@
 #summary Screenshots
 #labels Featured,screenshot
 
-http://rtgui.googlecode.com/svn/trunk/wiki/screen1.jpg
+http://rtgui.googlecode.com/svn/trunk/wiki/screenshot-main.jpg
 
-http://rtgui.googlecode.com/svn/trunk/wiki/screen2.jpg
+http://rtgui.googlecode.com/svn/trunk/wiki/screenshot-info-files.jpg
+
+http://rtgui.googlecode.com/svn/trunk/wiki/screenshot-info-tracker.jpg
+
+http://rtgui.googlecode.com/svn/trunk/wiki/screenshot-info-torrent.jpg
