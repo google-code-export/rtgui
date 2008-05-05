@@ -24,7 +24,7 @@ sudo apt-get install php5 php5-xmlrpc libapache2-mod-scgi rtorrent
 {{{
 sudo gedit /etc/apache2/sites-enabled/000-default
 }}}
- * Add the following lines, above the last "</VirtualHost>" (or download example from xxx:
+ * Add the following lines, above the last "</VirtualHost>" (or download example from http://rtgui.googlecode.com/files/000-default )
 {{{
 LoadModule scgi_module /usr/lib/apache2/modules/mod_scgi.so
 SCGIMount /RPC2 127.0.0.1:5000
