@@ -1,0 +1,57 @@
+#labels Phase-deploy
+#How I got rtGui working on Ubuntu 8.04 (Hardy Heron)
+
+= Introduction =
+
+This is a quick guide on how I got rtGui working on Ubuntu 8.04 (Hardy Heron)
+
+
+= Details =
+
+ * Download and install Ubuntu. http://www.ubuntu.com/GetUbuntu
+
+ * Login and open up a new Terminal.
+{{{
+Applications -> Accessories -> Terminal
+}}}
+
+ * Install the necessary packages:
+{{{
+sudo apt-get install php5 php5-xmlrpc libapache2-mod-scgi rtorrent
+}}}
+
+ * Edit Apache default server config:
+{{{
+sudo gedit /etc/apache2/sites-enabled/000-default
+}}}
+ * Add the following lines, above the last "</VirtualHost>" (or download example from xxx:
+{{{
+LoadModule scgi_module /usr/lib/apache2/modules/mod_scgi.so
+SCGIMount /RPC2 127.0.0.1:5000
+}}}
+ * Restart Apache.  Check it starts OK - if not, check you've done the above steps OK.
+{{{
+sudo apache2ctl restart
+}}}
+ * Create .rtorrent.rc file - see http://libtorrent.rakshasa.no/browser/trunk/rtorrent/doc/rtorrent.rc?rev=latest or download example from here xxx and save to your home directory - ~/.rtorrent.rc
+ * Create directories for rtorrent to use, and change the ownership to the user that runs rtorrent:
+{{{
+mkdir /Torrents /Torrents/Downloading /Torrents/Downloading/rtorrent.session /Torrents/Complete /Torrents/TorrentFiles /Torrents/TorrentFiles/Auto
+chown rtorrent /Torrents /Torrents/Downloading /Torrents/Downloading/rtorrent.session /Torrents/Complete /Torrents/TorrentFiles /Torrents/TorrentFiles/Auto
+}}}
+ * At this stage, check you can run rtorrent:
+{{{
+su - rtorrent  (optional - change to the user that runs rtorrent)
+rtorrent
+}}}
+ * Download rtgui from http://code.google.com/p/rtgui/downloads/list
+ * Extract files to webserver directory:
+{{{
+sudo tar xvzf ~/rtgui-0.2.3.tgz -c /var/www
+}}}
+ * Default settings in config should be OK, but just in case:
+{{{
+sudo gedit /var/www/rtgui/config.php
+}}}
+ * Now open your browser, and go to http://localhost/rtgui/
+ * Enjoy!
