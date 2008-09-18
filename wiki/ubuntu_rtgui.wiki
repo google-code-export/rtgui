@@ -34,6 +34,16 @@ SCGIMount /RPC2 127.0.0.1:5000
 sudo apache2ctl restart
 }}}
  * Create .rtorrent.rc file - see http://libtorrent.rakshasa.no/browser/trunk/rtorrent/doc/rtorrent.rc?rev=latest or download example from http://rtgui.googlecode.com/files/.rtorrent.rc and save to your home directory - ~/.rtorrent.rc
+
+* Note: when you download this file, it might end up in 'dos' text format.  rtorrent won't like this, and complain with a message similar to "rtorrent: Error in option file: ~/.rtorrent.rc:16: Invalid start of name.".  To convert it to 'unix' format, first install the tools:
+{{{
+sudo apt-get install tofrodos
+}}}
+..then convert it...
+{{{
+dos2unix .rtorrent.rc
+}}}
+
  * Create directories for rtorrent to use, and change the ownership to the user that runs rtorrent:
 {{{
 sudo mkdir /Torrents /Torrents/Downloading /Torrents/Downloading/rtorrent.session /Torrents/Complete /Torrents/TorrentFiles /Torrents/TorrentFiles/Auto
