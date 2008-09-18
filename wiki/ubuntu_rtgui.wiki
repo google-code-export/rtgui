@@ -47,7 +47,7 @@ rtorrent
  * Download rtgui from http://code.google.com/p/rtgui/downloads/list
  * Extract files to webserver directory:
 {{{
-sudo tar xvzf ~/rtgui-0.2.3.tgz -C /var/www
+sudo tar xvzf ~/rtgui-x.x.x.tgz -C /var/www
 }}}
  * Default settings in config should be OK, but just in case:
 {{{
