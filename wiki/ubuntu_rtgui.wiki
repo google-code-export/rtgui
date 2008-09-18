@@ -44,6 +44,7 @@ sudo chown rtorrent /Torrents /Torrents/Downloading /Torrents/Downloading/rtorre
 su - rtorrent  (optional - change to the user that runs rtorrent)
 rtorrent
 }}}
+ * Leave rtorrent running, and open a new Tab.  (If at some point you want to close rtorrent, press CTRL-Q)
  * Download rtgui from http://code.google.com/p/rtgui/downloads/list
  * Extract files to webserver directory:
 {{{
