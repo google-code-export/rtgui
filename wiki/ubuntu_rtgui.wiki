@@ -39,7 +39,7 @@ sudo apache2ctl restart
 {{{
 sudo apt-get install tofrodos
 }}}
-..then convert it...
+ * ..then convert it...
 {{{
 dos2unix .rtorrent.rc
 }}}
