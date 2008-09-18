@@ -36,8 +36,8 @@ sudo apache2ctl restart
  * Create .rtorrent.rc file - see http://libtorrent.rakshasa.no/browser/trunk/rtorrent/doc/rtorrent.rc?rev=latest or download example from http://rtgui.googlecode.com/files/.rtorrent.rc and save to your home directory - ~/.rtorrent.rc
  * Create directories for rtorrent to use, and change the ownership to the user that runs rtorrent:
 {{{
-mkdir /Torrents /Torrents/Downloading /Torrents/Downloading/rtorrent.session /Torrents/Complete /Torrents/TorrentFiles /Torrents/TorrentFiles/Auto
-chown rtorrent /Torrents /Torrents/Downloading /Torrents/Downloading/rtorrent.session /Torrents/Complete /Torrents/TorrentFiles /Torrents/TorrentFiles/Auto
+sudo mkdir /Torrents /Torrents/Downloading /Torrents/Downloading/rtorrent.session /Torrents/Complete /Torrents/TorrentFiles /Torrents/TorrentFiles/Auto
+sudo chown rtorrent /Torrents /Torrents/Downloading /Torrents/Downloading/rtorrent.session /Torrents/Complete /Torrents/TorrentFiles /Torrents/TorrentFiles/Auto
 }}}
  * At this stage, check you can run rtorrent:
 {{{
