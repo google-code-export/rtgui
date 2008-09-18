@@ -1,5 +1,5 @@
 #labels Phase-deploy,Featured
-#How I got rtGui working on Ubuntu 8.04 (Hardy Heron)
+How I got rtGui working on Ubuntu 8.04 (Hardy Heron)
 
 = Introduction =
 
