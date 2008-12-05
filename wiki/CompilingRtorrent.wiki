@@ -5,6 +5,7 @@
 
 This is how I got rtorrent compiled with XMLRPC-C on Ubuntu 8.10 (Intrepid), so that rtGui would display sizes of large files properly - without negative numbers.  The original problem is caused by the standard version of XMLRPC-C that is shipped with Ubuntu.  
 
+At the time of writing (Dec 2008), the current versions were rtorrent 0.8.2, libtorrent 0.12.2 and the SVN version of XMLRPC-C.
 
 = Preparation =
 
