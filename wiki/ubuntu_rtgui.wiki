@@ -66,3 +66,8 @@ sudo gedit /var/www/rtgui/config.php
 }}}
  * Now open your browser, and go to http://localhost/rtgui/
  * Enjoy!
+
+
+
+=SUPPORT=
+Please do not use these comments - use the Google Groups instead (link on project home page)
