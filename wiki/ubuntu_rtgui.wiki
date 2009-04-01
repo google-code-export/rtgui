@@ -60,6 +60,11 @@ rtorrent
 {{{
 sudo tar xvzf ~/rtgui-x.x.x.tgz -C /var/www
 }}}
+ * If new install, use example config.php:
+{{{
+cd /var/www/rtgui/
+sudo cp config.php.example config.php
+}}}
  * Default settings in config should be OK, but just in case:
 {{{
 sudo gedit /var/www/rtgui/config.php
